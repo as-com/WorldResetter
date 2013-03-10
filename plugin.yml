@@ -1,0 +1,9 @@
+name: WorldResetter
+main: com.andrewsun.worldresetter.WorldResetter
+version: 1.0
+depend: [Multiverse-Core]
+loadbefore: [Multiverse-Core]
+author: "Andrew Sun"
+website: "http://www.andrewsun.com"
+
+commands:
