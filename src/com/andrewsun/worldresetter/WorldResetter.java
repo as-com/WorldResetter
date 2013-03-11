@@ -17,8 +17,7 @@ public final class WorldResetter extends JavaPlugin {
 			if (!success) {
 				// Directory creation failed
 				getLogger().info("WorldResetter failed to create data directory!");
-			}
-			else {
+			} else {
 				getLogger().info("WorldResetter enabled!");	
 			}
 		}
@@ -33,26 +32,22 @@ public final class WorldResetter extends JavaPlugin {
 				sender.sendMessage(ChatColor.RED + "Usage:");
 				sender.sendMessage(ChatColor.RED + "/" + cmd + " <world>");
 				return true;
-			}
-			else {
+			} else {
 				if (args.length < 1) {
 					sender.sendMessage(ChatColor.RED + "Usage:");
 					sender.sendMessage(ChatColor.RED + "/" + cmd + " <world>");
 					return true;
-				}
-				else {
+				} else {
 					if (Bukkit.getWorld(args[0]) == null) {
 						sender.sendMessage(ChatColor.RED + "World does not exist or isn't loaded!");
 						return true;
-					}
-					else {
+					} else {
 						File worlddir=new File(getDataFolder() + args[0], null);
 						if (!worlddir.exists()) {
 							// No world backup directory
 							sender.sendMessage(ChatColor.RED + "There isn't a backup for this world!");
-						}
-						else {
-							// Import World backup
+						} else {
+							// TODO: Import World backup
 						}
 						return true;
 					}
