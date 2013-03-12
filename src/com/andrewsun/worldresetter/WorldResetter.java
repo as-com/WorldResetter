@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class WorldResetter extends JavaPlugin {
 
+	@Override
 	public void onEnable(){
 		File datadir=new File(getDataFolder(), null);
 		if (!datadir.exists()) {
@@ -23,9 +24,11 @@ public final class WorldResetter extends JavaPlugin {
 		}
 	}
 
+	@Override
 	public void onDisable(){
 		getLogger().info("WorldResetter disabled!");
 	}
+	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		if(cmd.getName().equalsIgnoreCase("resetworld")){
 			if (args.length > 1) {
