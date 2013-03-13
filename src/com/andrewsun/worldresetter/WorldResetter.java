@@ -1,9 +1,13 @@
 package com.andrewsun.worldresetter;
 
 import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,9 +16,8 @@ public final class WorldResetter extends JavaPlugin {
 
 	@Override
 	public void onEnable(){
-		File datadir=new File(getDataFolder(), null);
-		if (!datadir.exists()) {
-			boolean success = datadir.mkdirs();
+		if (!getDataFolder().exists()) {
+			boolean success = getDataFolder().mkdirs();
 			if (!success) {
 				// Directory creation failed
 				getLogger().info("WorldResetter failed to create data directory!");
@@ -50,7 +53,16 @@ public final class WorldResetter extends JavaPlugin {
 							// No world backup directory
 							sender.sendMessage(ChatColor.RED + "There isn't a backup for this world!");
 						} else {
-							// TODO: Import World backup
+							Bukkit.broadcastMessage(ChatColor.GREEN + "[WorldResetter] Resetting world \"" + args[0] + "\"...");
+							
+							Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv unload " + args[0]);
+							try {
+								FileUtils.deleteDirectory(Bukkit.getServer().getWorld(args[0]).getWorldFolder());
+							} catch (IOException e) {
+								Bukkit.broadcastMessage(ChatColor.RED + "[WorldResetter] Unable to delete world directory!");
+							}
+							
+							Bukkit.broadcastMessage(ChatColor.GREEN + "[WorldResetter] World \"" + args[0] + "\" sucessfully reset.");
 						}
 						return true;
 					}
