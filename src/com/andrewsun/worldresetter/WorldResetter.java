@@ -57,12 +57,15 @@ public final class WorldResetter extends JavaPlugin {
 							
 							Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv unload " + args[0]);
 							try {
-								FileUtils.deleteDirectory(Bukkit.getServer().getWorld(args[0]).getWorldFolder());
+								File WorldDirRepl = Bukkit.getServer().getWorld(args[0]).getWorldFolder();
+								FileUtils.deleteDirectory(WorldDirRepl);
+								FileUtils.copyDirectory(new File(getDataFolder() + args[0], null), new File(WorldDirRepl + "/../"));
+								Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "mv load " + args[0]);
+								Bukkit.broadcastMessage(ChatColor.GREEN + "[WorldResetter] World \"" + args[0] + "\" sucessfully reset.");
+								
 							} catch (IOException e) {
 								Bukkit.broadcastMessage(ChatColor.RED + "[WorldResetter] Unable to delete world directory!");
 							}
-							
-							Bukkit.broadcastMessage(ChatColor.GREEN + "[WorldResetter] World \"" + args[0] + "\" sucessfully reset.");
 						}
 						return true;
 					}
