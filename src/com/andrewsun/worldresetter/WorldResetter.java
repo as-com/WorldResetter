@@ -36,12 +36,12 @@ public final class WorldResetter extends JavaPlugin {
 		if(cmd.getName().equalsIgnoreCase("resetworld")){
 			if (args.length > 1) {
 				sender.sendMessage(ChatColor.RED + "Usage:");
-				sender.sendMessage(ChatColor.RED + "/" + cmd + " <world>");
+				sender.sendMessage(ChatColor.RED + "/resetworld <world>");
 				return true;
 			} else {
 				if (args.length < 1) {
 					sender.sendMessage(ChatColor.RED + "Usage:");
-					sender.sendMessage(ChatColor.RED + "/" + cmd + " <world>");
+					sender.sendMessage(ChatColor.RED + "/resetworld <world>");
 					return true;
 				} else {
 					if (Bukkit.getWorld(args[0]) == null) {
